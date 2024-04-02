@@ -197,4 +197,101 @@ public class Lessons {
         return answer;
     }
 
+//    배열 arr가 주어집니다. 배열 arr의 각 원소는 숫자 0부터 9까지로 이루어져 있습니다. 이때, 배열 arr에서 연속적으로 나타나는 숫자는 하나만 남기고 전부 제거하려고 합니다. 단, 제거된 후 남은 수들을 반환할 때는 배열 arr의 원소들의 순서를 유지해야 합니다. 예를 들면,
+//
+//    arr = [1, 1, 3, 3, 0, 1, 1] 이면 [1, 3, 0, 1] 을 return 합니다.
+//            arr = [4, 4, 4, 3, 3] 이면 [4, 3] 을 return 합니다.
+//    배열 arr에서 연속적으로 나타나는 숫자는 제거하고 남은 수들을 return 하는 solution 함수를 완성해 주세요.
+
+    public int[] lessons12906(int[] arr){
+
+        Stack<Integer> stack = new Stack<Integer>();
+
+        stack.push(arr[0]);
+
+        for(int i = 1; i < arr.length; i++){
+            if(stack.peek() != arr[i]){
+                stack.push(arr[i]);
+            }
+        }
+
+        int[] answer = new int[stack.size()];
+
+        for (int i = stack.size() - 1; i >= 0; i--) {
+            answer[i] = stack.pop();
+        }
+
+
+        return answer;
+    }
+
+//    0과 1로 이루어진 어떤 문자열 x에 대한 이진 변환을 다음과 같이 정의합니다.
+//
+//    x의 모든 0을 제거합니다.
+//    x의 길이를 c라고 하면, x를 "c를 2진법으로 표현한 문자열"로 바꿉니다.
+//    예를 들어, x = "0111010"이라면, x에 이진 변환을 가하면 x = "0111010" -> "1111" -> "100" 이 됩니다.
+//
+//     0과 1로 이루어진 문자열 s가 매개변수로 주어집니다. s가 "1"이 될 때까지 계속해서 s에 이진 변환을 가했을 때, 이진 변환의 횟수와 변환 과정에서 제거된 모든 0의 개수를 각각 배열에 담아 return 하도록 solution 함수를 완성해주세요.
+
+    public int[] lessons70129(String s){
+        int[] answer = new int[2];
+
+        int countConversion = 0;
+        int countZero = 0;
+
+        while (!s.equals("1")) {
+            countConversion++;
+            int zeroCount = 0;
+            for (char c : s.toCharArray()) {
+                if (c == '0') {
+                    zeroCount++;
+                }
+            }
+            countZero += zeroCount;
+
+            s = Integer.toBinaryString(s.length() - zeroCount);
+        }
+
+        answer[0] = countConversion;
+        answer[1] = countZero;
+
+
+        return answer;
+    }
+
+//
+//    Finn은 요즘 수학공부에 빠져 있습니다. 수학 공부를 하던 Finn은 자연수 n을 연속한 자연수들로 표현 하는 방법이 여러개라는 사실을 알게 되었습니다. 예를들어 15는 다음과 같이 4가지로 표현 할 수 있습니다.
+//
+//        1 + 2 + 3 + 4 + 5 = 15
+//        4 + 5 + 6 = 15
+//        7 + 8 = 15
+//        15 = 15
+//    자연수 n이 매개변수로 주어질 때, 연속된 자연수들로 n을 표현하는 방법의 수를 return하는 solution를 완성해주세요.
+    public int lessons12924(int n){
+        int answer = 0;
+
+        int start = 1;
+
+        while(start <= n){
+            int sum = 0;
+            for(int i = start; sum < n; i++){
+                sum += i; //
+                if(sum == n){
+                    answer ++;
+                    break;
+                }
+                else if(sum > n){
+                    break;
+                }
+            }
+            start ++;
+        }
+
+
+        return answer;
+
+    }
+
+
+
 }
